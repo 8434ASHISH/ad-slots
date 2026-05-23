@@ -1,36 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UltraShare Ads Slot</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FileShare P2P - Ad Slots</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      /* 🌌 आपके एक्सटेंशन से मैच करने के लिए प्रीमियम सॉलिड डार्क कलर */
+      background: #0d0e15; 
+      overflow: hidden;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      padding-top: 10px;
+    }
     
-    <!-- 💰 यहाँ अपना Monetag या Adsterra का स्क्रिप्ट कोड डालें -->
-    <!-- (अगर स्क्रिप्ट कोड खो गया है, तो डायरेक्ट Monetag सपोर्ट से न्यू टैग ले लें या केवल अपनी Zone ID यहाँ बदलें) -->
-    <script>(function(s,u,z,p,v,e,d){p=s.createElement(u);p.async=1;p.src=z;in=s.getElementsByTagName(u);in.parentNode.insertBefore(p,in);})(window,document,"//://heygizmo.com",window);</script>
+    .brand-text {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 2px;
+      font-weight: bold;
+    }
+
+    /* 🎯 विज्ञापन का मुख्य बॉक्स (300x250 साइज लॉक) */
+    .ad-slot {
+      width: 300px;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+  </style>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- 💰 1. IN-PAGE PUSH / DIRECT TAG SCRIPT (MONETAG/ADSTERRA) -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- पक्का करें कि Monetag से मिला मुख्य स्क्रिप्ट कोड ठीक यहाँ नीचे पेस्ट हो -->
+  <script>(function(s,u,z,p,v,e,d){p=s.createElement(u);p.async=1;p.src=z;in=s.getElementsByTagName(u);in.parentNode.insertBefore(p,in);})(window,document,"//://heygizmo.com",window);</script>
+
 </head>
 <body>
 
-    <div class="ads-wrapper">
-        <!-- 🎯 विज्ञापन बॉक्स: अब यह बिना किसी फालतू टेक्स्ट के सीधा टॉप पर लोड होगा -->
-        <div class="ad-card">
-            <span class="ad-label">✦ SPONSORED CONTENT ✦</span>
-            <div class="ad-slot-frame">
-                <!-- आपका विज्ञापन यहाँ बिना कटे लोड होगा -->
-                <div id="monetag-ad-placement"></div>
-            </div>
-        </div>
+  <div class="brand-text">✦ SPONSORED CONTENT ✦</div>
 
-        <!-- 📄 लीगल लिंक्स -->
-        <div class="legal-box">
-            <div class="links-grid">
-                <a href="privacy.html" target="_blank">Privacy Policy</a>
-                <a href="disclaimer.html" target="_blank">Disclaimer</a>
-                <a href="contact.html" target="_blank">Contact</a>
-            </div>
-        </div>
-    </div>
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- 💰 2. NATIVE BANNER 300x250 (MAIN ADS SPACE)              -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="ad-slot" id="monetag-banner">
+    <!-- यदि आपको डैशबोर्ड से कोई इन-पेज प्लेसमेंट div टैग मिला है, तो उसे यहाँ डालें -->
+    <div id="monetag-ad-placement"></div>
+    
+    <!-- यदि आप ADSTERRA का 300x250 बैनर यूज़ कर रहे हैं, तो उसका स्क्रिप्ट कोड यहाँ पेस्ट करें: -->
+    <!-- Example: 
+    <script type="text/javascript">
+      atOptions = { 'key' : 'YOUR_ADSTERRA_KEY', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+    </script>
+    <script type="text/javascript" src="//://highperformanceformat.com"></script>
+    -->
+  </div>
 
 </body>
 </html>
