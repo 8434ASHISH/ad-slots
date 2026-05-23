@@ -1,3 +1,4 @@
+/* ─── UltraShare Responsive Dark Ads CSS ─── */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,66 +6,119 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: transparent;
-    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* 🌌 आपके एक्सटेंशन से मैच करता हुआ प्रीमियम डार्क बैकग्राउंड */
+    background: #0d0e15; 
+    overflow-x: hidden;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
+/* मुख्य कंटेनर */
 .ads-wrapper {
     width: 100%;
     max-width: 320px;
-    padding: 2px; /* पैडिंग को बिल्कुल कम किया ताकि स्क्रीन स्पेस बचे */
+    padding: 8px 5px;
     text-align: center;
 }
 
-/* 🎯 विज्ञापन का मुख्य कंटेनर */
+.title-brand {
+    color: #ffffff; /* चमकदार सफेद टेक्स्ट */
+    font-size: 13px;
+    margin-bottom: 2px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    opacity: 0.9;
+}
+
+.subtitle-brand {
+    color: rgba(255, 255, 255, 0.45); /* हल्का ग्रे-वाइट टेक्स्ट */
+    font-size: 10px;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+}
+
+/* 🎯 विज्ञापन का मुख्य कार्ड (डार्क थीम वेरिएंट) */
 .ad-card {
-    background: rgba(255, 255, 255, 0.03); /* हल्का पारदर्शी ग्लो */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* 🦾 डार्क ग्लासमोर्फिज़्म इफ़ेक्ट */
+    background: rgba(255, 255, 255, 0.03); 
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
-    padding: 6px;
-    margin: 0 auto 5px auto;
-    width: 300px;
-    height: 270px; /* 250px एड + 20px लेबल पट्टी के लिए परफेक्ट */
+    padding: 8px;
+    margin: 0 auto 12px auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    width: 300px;  
+    height: 272px; 
 }
 
 .ad-label {
-    font-size: 10px;
-    color: #a1a1aa;
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.4); /* एस्थेटिक लुक के लिए मंद टेक्स्ट */
     text-transform: uppercase;
     margin-bottom: 6px;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     display: block;
+    font-weight: bold;
 }
 
-/* फ्रेम जिसके अंदर एड लोड होगा */
+/* वह फ्रेम जिसके अंदर विज्ञापन लोड होगा */
 .ad-slot-frame {
-    width: 286px;
-    height: 250px;
-    background: #0d0e15; /* आपके डार्क थीम से मैच करता हुआ बैकग्राउंड */
+    width: 284px; 
+    height: 250px; 
+    background: #050508; /* विज्ञापनों को उभारने के लिए गहरा काला बैकग्राउंड */
     border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-/* 📄 लीगल लिंक्स छोटा और साफ */
+/* 📄 लीगल बॉक्स स्टाइल */
 .legal-box {
-    margin-top: 2px;
-    width: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    padding: 8px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.legal-title {
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .links-grid {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 .legal-box a {
-    color: rgba(255, 255, 255, 0.4);
+    color: #6366f1; /* सुंदर इंडिगो/ब्लू लिंक कलर */
     text-decoration: none;
     font-size: 10px;
+    padding: 3px 8px;
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
 }
 
 .legal-box a:hover {
+    background: rgba(99, 102, 241, 0.2);
     color: #ffffff;
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+}
+
+.copyright {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.25);
+    margin-top: 8px;
 }
