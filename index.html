@@ -3,422 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro AR Particle Core</title>
+    <title>UtraShare - Ad Slots</title>
     <style>
-        /* --- PROFESSIONAL UI STYLING --- */
-        :root { --primary: #00f3ff; --secondary: #ff0055; --bg: #050505; }
-        body { margin: 0; overflow: hidden; background: var(--bg); font-family: 'Courier New', Courier, monospace; }
-        
-        /* Fullscreen Video Background */
-        #cam-feed {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            object-fit: cover; z-index: -2; transform: scaleX(-1); opacity: 0; transition: opacity 1s;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        /* Canvas */
-        #gl-canvas { position: fixed; top: 0; left: 0; z-index: 1; }
-
-        /* HUD Overlay */
-        #hud {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 10;
-            display: none; /* Hidden until loaded */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
         }
         
-        .hud-panel {
-            position: absolute; border: 1px solid rgba(0, 243, 255, 0.3);
-            background: rgba(0, 10, 20, 0.6); padding: 15px; color: var(--primary);
-            text-transform: uppercase; font-size: 12px; letter-spacing: 1px;
-            backdrop-filter: blur(4px);
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
         }
-
-        #top-left { top: 20px; left: 20px; border-left: 4px solid var(--primary); }
-        #bottom-right { bottom: 20px; right: 20px; text-align: right; border-right: 4px solid var(--secondary); }
         
-        .value { color: white; font-weight: bold; font-size: 14px; }
-        .recording-dot { display: inline-block; width: 10px; height: 10px; background: red; border-radius: 50%; animation: blink 1s infinite; margin-right: 5px;}
-
-        /* Loading Screen */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 100; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; color: var(--primary);
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        .spinner {
-            width: 50px; height: 50px; border: 3px solid transparent; border-top: 3px solid var(--primary);
-            border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px;
+        
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            font-size: 1rem;
         }
-        #start-btn {
-            margin-top: 20px; padding: 15px 40px; background: transparent; color: var(--primary);
-            border: 2px solid var(--primary); font-family: inherit; font-size: 16px;
-            cursor: pointer; text-transform: uppercase; transition: 0.3s; display: none;
+        
+        .ad-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
-        #start-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 30px var(--primary); }
-
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes blink { 50% { opacity: 0; } }
+        
+        .ad-label {
+            font-size: 0.85rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .ad-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px dashed #dee2e6;
+        }
+        
+        /* Monetag 300x250 Ad */
+        .monetag-ad {
+            width: 300px;
+            height: 250px;
+            margin: 0 auto;
+        }
+        
+        /* Adsterra 468x60 Ad */
+        .adsterra-banner {
+            width: 468px;
+            height: 60px;
+            margin: 0 auto;
+        }
+        
+        /* Adsterra 300x250 Ad */
+        .adsterra-box {
+            width: 300px;
+            height: 250px;
+            margin: 0 auto;
+        }
+        
+        .footer-legal {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .footer-legal h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .legal-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .legal-links a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 600px) {
+            .adsterra-banner {
+                width: 100%;
+                max-width: 468px;
+            }
+            .logo {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <video id="cam-feed" autoplay playsinline muted></video>
-
-    <div id="loader">
-        <div class="spinner"></div>
-        <div id="status-text">INITIALIZING SYSTEM...</div>
-        <button id="start-btn">INITIALIZE CAMERA</button>
-    </div>
-
-    <div id="hud">
-        <div id="top-left" class="hud-panel">
-            <div><span class="recording-dot"></span>LIVE FEED ACTIVE</div>
-            <br>
-            <div>TRACKING: <span id="track-status" class="value" style="color:red">SEARCHING...</span></div>
-            <div>FPS: <span id="fps-counter" class="value">60</span></div>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">⚡ UtraShare</div>
+        <div class="subtitle">P2P File Transfer - Fast, Secure & Direct</div>
+        
+        <!-- Monetag 300x250 Ad Slot -->
+        <div class="ad-section">
+            <div class="ad-label">Sponsored Content</div>
+            <div class="ad-box">
+                <div class="monetag-ad">
+                    <!-- 🔽 MONETAG 300x250 AD CODE YAHAN LAGAYE 🔽 -->
+                    <script src="https://your-monetag-script.js"></script>
+                    <!-- Monetag ad code yahan paste karein -->
+                </div>
+            </div>
         </div>
         
-        <div id="bottom-right" class="hud-panel">
-            <div>EFFECT ID: <span id="effect-id" class="value">#001</span></div>
-            <div>PARTICLES: <span class="value">18,000</span></div>
-            <div style="margin-top:10px; color:var(--secondary)">GESTURE CONTROL ENGAGED</div>
+        <!-- Adsterra 468x60 Banner Ad -->
+        <div class="ad-section">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-box" style="min-height: 80px;">
+                <div class="adsterra-banner">
+                    <!-- 🔽 ADSTERRA 468x60 AD CODE YAHAN LAGAYE 🔽 -->
+                    <script type="text/javascript">
+                        // Adsterra 468x60 code yahan paste karein
+                    </script>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Adsterra 300x250 Box Ad -->
+        <div class="ad-section">
+            <div class="ad-label">Sponsored</div>
+            <div class="ad-box">
+                <div class="adsterra-box">
+                    <!-- 🔽 ADSTERRA 300x250 AD CODE YAHAN LAGAYE 🔽 -->
+                    <script type="text/javascript">
+                        // Adsterra 300x250 code yahan paste karein
+                    </script>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Legal Footer -->
+        <div class="footer-legal">
+            <h3>📄 Legal Information</h3>
+            <div class="legal-links">
+                <a href="privacy.html">🔒 Privacy Policy</a>
+                <a href="disclaimer.html">⚠️ Disclaimer</a>
+                <a href="contact.html">📧 Contact Us</a>
+                <a href="terms.html">📋 Terms of Service</a>
+            </div>
+            <div class="copyright">
+                © 2026 UtraShare. All rights reserved. | P2P Direct Transfer Technology
+            </div>
         </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
-
-    <script>
-        /**
-         * PROFESSIONAL AR PARTICLE SYSTEM
-         * Author: Gemini Coding Partner
-         * Features: 18k Particles, Glow Shader, HUD, Smooth Tracking
-         */
-
-        // --- GLOBAL SETTINGS ---
-        const SETTINGS = {
-            particleCount: 18000,
-            particleSize: 0.8, // Larger for glow effect
-            handSmoothFactor: 0.15, // Lower is smoother, higher is faster
-            zDepth: 40
-        };
-
-        // --- STATE MANAGEMENT ---
-        const state = {
-            handVisible: false,
-            targetX: 0, targetY: 0,
-            currX: 0, currY: 0,
-            expansion: 1,
-            effectMode: 0, // 0-50 mapped from hand position
-            time: 0
-        };
-
-        // --- DOM ELEMENTS ---
-        const dom = {
-            video: document.getElementById('cam-feed'),
-            loader: document.getElementById('loader'),
-            status: document.getElementById('status-text'),
-            btn: document.getElementById('start-btn'),
-            hud: document.getElementById('hud'),
-            trackStatus: document.getElementById('track-status'),
-            effectId: document.getElementById('effect-id'),
-            fps: document.getElementById('fps-counter')
-        };
-
-        // --- AUDIO ENGINE (Professional Synth) ---
-        class AudioEngine {
-            constructor() {
-                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-                this.osc = this.ctx.createOscillator();
-                this.gain = this.ctx.createGain();
-                this.filter = this.ctx.createBiquadFilter();
-
-                // Setup Chain: Osc -> Filter -> Gain -> Out
-                this.osc.type = 'sawtooth';
-                this.filter.type = 'lowpass';
-                this.filter.frequency.value = 500;
-                this.gain.gain.value = 0;
-
-                this.osc.connect(this.filter);
-                this.filter.connect(this.gain);
-                this.gain.connect(this.ctx.destination);
-                this.osc.start();
-            }
-
-            update(handX, handY, visible) {
-                if(!visible) {
-                    this.gain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.5);
-                    return;
-                }
-                // Volume up when hand visible
-                this.gain.gain.setTargetAtTime(0.08, this.ctx.currentTime, 0.1);
-                
-                // Frequency mapped to Y (Height)
-                const freq = 100 + (handY * 400); 
-                this.osc.frequency.setTargetAtTime(freq, this.ctx.currentTime, 0.1);
-
-                // Filter opening mapped to X
-                this.filter.frequency.setTargetAtTime(200 + (handX * 2000), this.ctx.currentTime, 0.1);
-            }
-
-            resume() { if(this.ctx.state === 'suspended') this.ctx.resume(); }
-        }
-        let audio;
-
-        // --- THREE.JS ENGINE ---
-        let scene, camera, renderer, particles, geometry;
-        let positions, colors, sizes, targetPositions;
-
-        function initThree() {
-            scene = new THREE.Scene(); // No background set = Transparent
-            
-            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = SETTINGS.zDepth;
-
-            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap pixel ratio for performance
-            renderer.domElement.id = 'gl-canvas';
-            document.body.appendChild(renderer.domElement);
-
-            // Generate "Glow" Texture
-            const canvas = document.createElement('canvas');
-            canvas.width = 32; canvas.height = 32;
-            const ctx = canvas.getContext('2d');
-            const g = ctx.createRadialGradient(16,16,0, 16,16,16);
-            g.addColorStop(0, 'rgba(255,255,255,1)');
-            g.addColorStop(0.2, 'rgba(200,240,255,0.8)');
-            g.addColorStop(0.5, 'rgba(0,100,255,0.2)');
-            g.addColorStop(1, 'rgba(0,0,0,0)');
-            ctx.fillStyle = g;
-            ctx.fillRect(0,0,32,32);
-            const tex = new THREE.Texture(canvas);
-            tex.needsUpdate = true;
-
-            // Geometry setup
-            geometry = new THREE.BufferGeometry();
-            positions = new Float32Array(SETTINGS.particleCount * 3);
-            targetPositions = new Float32Array(SETTINGS.particleCount * 3);
-            colors = new Float32Array(SETTINGS.particleCount * 3);
-            
-            // Initial Random spread
-            for(let i=0; i<SETTINGS.particleCount * 3; i++) {
-                positions[i] = (Math.random()-0.5) * 100;
-                targetPositions[i] = positions[i];
-                colors[i] = 1.0;
-            }
-
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-            const material = new THREE.PointsMaterial({
-                size: SETTINGS.particleSize,
-                map: tex,
-                vertexColors: true,
-                blending: THREE.AdditiveBlending,
-                depthWrite: false,
-                transparent: true
-            });
-
-            particles = new THREE.Points(geometry, material);
-            scene.add(particles);
-
-            // Handle Resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-
-        // --- MATH LIBRARY (Procedural Shapes) ---
-        const MathLib = {
-            sphere: (i, count) => {
-                const phi = Math.acos(-1 + (2*i)/count);
-                const theta = Math.sqrt(count * Math.PI) * phi;
-                return { x: 12*Math.sin(phi)*Math.cos(theta), y: 12*Math.sin(phi)*Math.sin(theta), z: 12*Math.cos(phi) };
-            },
-            cube: (i, count) => {
-                const s = 15;
-                return { x: (Math.random()-0.5)*s, y: (Math.random()-0.5)*s, z: (Math.random()-0.5)*s };
-            },
-            torus: (i, count) => {
-                const theta = (i/count) * Math.PI * 2 * 15;
-                const tub = (i/count) * Math.PI * 2;
-                return { x: (10 + 3*Math.cos(tub))*Math.cos(theta), y: (10 + 3*Math.cos(tub))*Math.sin(theta), z: 3*Math.sin(tub) };
-            },
-            spiral: (i, count) => {
-                const t = i * 0.05;
-                return { x: t*0.1 * Math.cos(t), y: t*0.1 * Math.sin(t), z: (Math.random()-0.5)*5 };
-            }
-        };
-
-        function updateParticles() {
-            state.time += 0.01;
-            
-            // 1. Determine Shape Base based on Effect Mode (0-3)
-            // We blend between shapes based on Hand X position mapping
-            let generator = MathLib.sphere;
-            if(state.effectMode > 12) generator = MathLib.torus;
-            if(state.effectMode > 25) generator = MathLib.spiral;
-            if(state.effectMode > 37) generator = MathLib.cube;
-
-            const time = state.time;
-            const positions = particles.geometry.attributes.position.array;
-            const colors = particles.geometry.attributes.color.array;
-
-            // 2. Physics & Morphing Loop
-            for(let i=0; i<SETTINGS.particleCount; i++) {
-                const idx = i*3;
-                
-                // Get Base Shape
-                const base = generator(i, SETTINGS.particleCount);
-                
-                // Apply "Noise" / Variance based on Effect Mode
-                // If effectMode is odd, add jitter
-                const jitter = (state.effectMode % 2 !== 0) ? Math.sin(time + i) * 0.5 : 0;
-                
-                let tx = base.x * state.expansion + jitter;
-                let ty = base.y * state.expansion + jitter;
-                let tz = base.z * state.expansion;
-
-                // Rotation around Y axis
-                const rotSpeed = 0.001 * (state.effectMode + 1);
-                const cosR = Math.cos(time * rotSpeed);
-                const sinR = Math.sin(time * rotSpeed);
-                
-                const rx = tx * cosR - tz * sinR;
-                const rz = tx * sinR + tz * cosR;
-                tx = rx; tz = rz;
-
-                // Move current pos to target (Lerp)
-                // If hand is not visible, explode outward slightly
-                const lerpFactor = state.handVisible ? 0.1 : 0.02;
-                
-                // Apply Global Position (Follow Hand)
-                const globalX = state.currX;
-                const globalY = state.currY;
-
-                positions[idx]   += (tx + globalX - positions[idx]) * lerpFactor;
-                positions[idx+1] += (ty + globalY - positions[idx+1]) * lerpFactor;
-                positions[idx+2] += (tz - positions[idx+2]) * lerpFactor;
-
-                // Color Engine
-                // Map Color Hue to X position and Time
-                const hue = (i/SETTINGS.particleCount + time * 0.1 + (state.currX/50)) % 1;
-                const color = new THREE.Color().setHSL(hue, 1.0, 0.6);
-                
-                colors[idx] = color.r;
-                colors[idx+1] = color.g;
-                colors[idx+2] = color.b;
-            }
-
-            particles.geometry.attributes.position.needsUpdate = true;
-            particles.geometry.attributes.color.needsUpdate = true;
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            
-            // Smooth Hand Movement
-            state.currX += (state.targetX - state.currX) * SETTINGS.handSmoothFactor;
-            state.currY += (state.targetY - state.currY) * SETTINGS.handSmoothFactor;
-
-            // Update Audio
-            if(audio) audio.update(state.currX/30, state.currY/20, state.handVisible);
-            
-            updateParticles();
-            renderer.render(scene, camera);
-
-            // FPS Counter (Basic approximation)
-            if(Math.random() > 0.95) {
-                dom.fps.innerText = Math.floor(55 + Math.random()*5);
-            }
-        }
-
-        // --- MEDIAPIPE HANDS SETUP ---
-        function onResults(results) {
-            dom.loader.style.display = 'none'; // Hide loader once we get data
-            dom.hud.style.display = 'block';   // Show HUD
-
-            if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-                state.handVisible = true;
-                const hand = results.multiHandLandmarks[0];
-                
-                // Status Update
-                dom.trackStatus.innerHTML = "LOCKED";
-                dom.trackStatus.style.color = "#00f3ff";
-
-                // 1. Position Mapping (0..1 -> -30..30)
-                // Mirror X (1 - x)
-                const x = (1 - hand[9].x - 0.5) * 60; 
-                const y = (0.5 - hand[9].y) * 40;
-                state.targetX = x;
-                state.targetY = y;
-
-                // 2. Pinch Detection (Thumb tip 4 vs Index tip 8)
-                const d = Math.hypot(hand[4].x - hand[8].x, hand[4].y - hand[8].y);
-                // Map distance 0.02..0.2 to Expansion 0.5..2.5
-                state.expansion = 0.5 + (d * 10);
-
-                // 3. Effect Mapping (50+ Variations)
-                // We use Hand X position (0..1) multiplied by 50 to select an "Effect ID"
-                // Effect ID determines shape and turbulence
-                const handXnorm = 1 - hand[9].x; // 0 to 1
-                const effectID = Math.floor(handXnorm * 50);
-                state.effectMode = effectID;
-                dom.effectId.innerText = "#0" + (effectID < 10 ? "0"+effectID : effectID);
-
-            } else {
-                state.handVisible = false;
-                dom.trackStatus.innerHTML = "SEARCHING...";
-                dom.trackStatus.style.color = "red";
-                // Drift to center
-                state.targetX = 0; 
-                state.targetY = 0;
-            }
-        }
-
-        // --- INITIALIZATION FLOW ---
-        const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
-        hands.setOptions({
-            maxNumHands: 1,
-            modelComplexity: 1,
-            minDetectionConfidence: 0.6,
-            minTrackingConfidence: 0.6
-        });
-        hands.onResults(onResults);
-
-        // Start Button Logic
-        dom.btn.style.display = 'block';
-        dom.status.innerText = "SYSTEM READY";
-
-        dom.btn.addEventListener('click', async () => {
-            dom.btn.innerText = "ACCESSING OPTICS...";
-            
-            // Init Audio Context (must be after user gesture)
-            audio = new AudioEngine();
-            audio.resume();
-
-            initThree();
-            animate();
-
-            // Camera Start
-            const cameraUtils = new Camera(dom.video, {
-                onFrame: async () => { await hands.send({image: dom.video}); },
-                width: 1280,
-                height: 720
-            });
-            
-            try {
-                await cameraUtils.start();
-                dom.video.style.opacity = 1; // Fade in video
-            } catch(e) {
-                alert("Camera Access Denied. Please enable camera permissions.");
-            }
-        });
-
-    </script>
 </body>
 </html>
