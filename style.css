@@ -1,0 +1,113 @@
+/* ─── UltraShare Responsive Ads CSS ─── */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: transparent; /* पारदर्शी ताकि एक्सटेंशन का बैकग्राउंड दिखे */
+    overflow-x: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* मुख्य कंटेनर जो साइज को कंट्रोल करता है */
+.ads-wrapper {
+    width: 100%;
+    max-width: 320px; /* एक्सटेंशन और मोबाइल कम्पैटिबिलिटी के लिए बेस्ट साइज */
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.title-brand {
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 2px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.subtitle-brand {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 10px;
+    margin-bottom: 12px;
+}
+
+/* 🎯 विज्ञापन का मुख्य कार्ड */
+.ad-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 8px;
+    margin: 0 auto 12px auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    width: 300px;  /* 300px चौड़ाई लॉक */
+    height: 272px; /* 250px विज्ञापन + ऊपर का लेबल पट्टी */
+}
+
+.ad-label {
+    font-size: 9px;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    display: block;
+}
+
+/* वह फ्रेम जिसके अंदर विज्ञापन लोड होगा */
+.ad-slot-frame {
+    width: 284px; /* कार्ड के पैडिंग के हिसाब से अंदरूनी चौड़ाई */
+    height: 250px; /* 250px हाइट लॉक */
+    background: #f8f9fa;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* 📄 लीगल बॉक्स स्टाइल */
+.legal-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 8px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.legal-title {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 6px;
+}
+
+.links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.legal-box a {
+    color: #85a5ff;
+    text-decoration: none;
+    font-size: 10px;
+    padding: 2px 6px;
+    background: rgba(133, 165, 255, 0.1);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.legal-box a:hover {
+    background: rgba(133, 165, 255, 0.2);
+    color: #ffffff;
+}
+
+.copyright {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 6px;
+}
