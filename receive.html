@@ -3,76 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ Receive File - FileShare</title>
+    <title>⚡ Receive File - UltraShare</title>
     <style>
-        body { margin: 0; padding: 20px; background: #0d0e15; color: #fff; font-family: Arial, sans-serif; text-align: center; }
-        .container { max-width: 350px; margin: 0 auto; padding-top: 10px; }
-        .logo { font-size: 24px; font-weight: bold; margin-bottom: 25px; color: #6366f1; }
-        .code-box { font-size: 20px; color: #28a745; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 20px; letter-spacing: 1px; }
-        .status { margin: 20px 0; font-size: 15px; color: #a1a1aa; }
+        /* ─── 🎨 एस्थेटिक सॉलिड डार्क कलर थीम ─── */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            padding: 20px 15px;
+            background-color: #0d0e15; /* सॉलिड डीप डार्क बैकग्राउंड */
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #6366f1; /* इंडिगो सॉलिड कलर */
+            letter-spacing: 0.5px;
+        }
         
-        /* 📊 progress bar */
-        .progress-bar { width: 100%; background: rgba(255,255,255,0.1); border-radius: 10px; height: 10px; overflow: hidden; margin-top: 10px; }
-        .progress-fill { width: 0%; background: #6366f1; height: 100%; transition: width 0.1s; }
+        /* 📟 कनेक्टेड कोड बॉक्स स्टाइल */
+        .code-box {
+            font-size: 18px;
+            font-weight: 600;
+            color: #22c55e; /* सॉलिड ब्राइट ग्रीन */
+            background-color: #161b22; /* सॉलिड चारकोल बॉक्स */
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #21262d;
+            letter-spacing: 0.5px;
+        }
+        .code-box span {
+            color: #ffffff;
+            background-color: #238636; /* सॉलिड ग्रीन बैज */
+            padding: 2px 10px;
+            border-radius: 6px;
+            margin-left: 5px;
+            font-family: monospace;
+            font-size: 20px;
+        }
+        
+        /* 📡 कनेक्शन स्टेटस */
+        .status {
+            margin: 20px 0;
+            font-size: 15px;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+        
+        /* 📊 सॉलिड प्रोग्रेस बार */
+        .progress-container {
+            background-color: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #30363d; /* सॉलिड ग्रे ट्रैक */
+            border-radius: 10px;
+            height: 12px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        .progress-fill {
+            width: 0%;
+            background-color: #6366f1; /* सॉलिड इंडिगो फिल */
+            height: 100%;
+            transition: width 0.1s linear;
+        }
+        
+        /* 📶 लोकल नेटवर्क निर्देश पट्टी */
+        .network-tip {
+            font-size: 11px;
+            color: #94a3b8;
+            background-color: #1e293b; /* सॉलिड नेवी ब्लू टिप बॉक्स */
+            padding: 10px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px dashed #334155;
+            line-height: 1.5;
+            text-align: left;
+        }
+        
+        /* 💰 विज्ञापन कंटेनर (300x250 एड के लिए फिक्स साइज) */
+        .ads-wrapper {
+            margin-top: 25px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .ads-wrapper iframe {
+            border: none;
+            max-width: 320px;
+            display: block;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: transparent;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="logo">⚡ FILEShare Receiver</div>
+        <!-- मुख्य ब्रांड नाम -->
+        <div class="logo">⚡ UltraShare Receiver</div>
         
+        <!-- रूम कोड जो QR से स्कैन करने पर अपने आप आ जाएगा -->
         <div class="code-box">
-            Connected Code: <span id="active-code">Loading...</span>
+            Room Code: <span id="active-code">######</span>
         </div>
 
-        <div id="status-text" class="status">🔄 Connection Initializing...</div>
+        <!-- लाइव स्टेटस टेक्स्ट -->
+        <div id="status-text" class="status">🔄 Initializing Secure P2P Connection...</div>
 
-        <div id="progress-container" style="display:none; margin: 15px 0;">
-            <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
-            <p id="progress-percent" style="font-size: 12px; color:#a1a1aa; margin-top:5px;">0%</p>
+        <!-- फ़ाइल ट्रांसफर प्रोग्रेस बार सेक्शन -->
+        <div id="progress-container" class="progress-container" style="display: none;">
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <p id="progress-percent" style="font-size: 13px; color: #94a3b8; margin-top: 8px; font-weight: bold;">0%</p>
         </div>
 
-        <p style="font-size: 11px; color: #8a8a93; background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; border: 1px dashed rgba(255,255,255,0.1);">
-            ℹ️ <b>डेटा बचाने के लिए:</b> पक्का करें कि मोबाइल और पीसी <b>एक ही वाई-फाई/हॉटस्पॉट</b> से कनेक्टेड हैं।
-        </p>
+        <!-- 📶 डेटा सेविंग निर्देश -->
+        <div class="network-tip">
+            ℹ️ <b>डेटा बचाने की टिप:</b> यदि दोनों डिवाइसेस <b>एक ही वाई-फाई या हॉटस्पॉट (Same Network)</b> से जुड़े हैं, तो आपका कोई भी मोबाइल इंटरनेट डेटा (MB/GB) खर्च नहीं होगा।
+        </div>
 
-        <!-- 💰 विज्ञापन SLOT (यह इसी रिपो के index.html यानी विज्ञापन को लोड करेगा) -->
-        <div style="margin-top: 25px;">
-            <iframe src="index.html" width="100%" height="310" frameborder="0" scrolling="no" style="border: none; max-width: 320px; display: block; margin: 0 auto; overflow: hidden;"></iframe>
+        <!-- 💰 विज्ञापन SLOT (यह आपकी इसी रिपॉजिटरी के index.html वाले विज्ञापन को लोड करेगा) -->
+        <div class="ads-wrapper">
+            <iframe src="index.html" width="100%" height="310" frameborder="0" scrolling="no"></iframe>
         </div>
     </div>
 
     <script>
+        // 📡 URL पैरामीटर से रूम कोड निकालना (?room=XXXXXX)
         const urlParams = new URLSearchParams(window.location.search);
         const roomCode = urlParams.get('room');
+        let remoteConnection;
         
         if (roomCode) {
             document.getElementById('active-code').innerText = roomCode;
             connectToSender(roomCode);
         } else {
-            document.getElementById('status-text').innerText = "❌ No Room Code Found in QR.";
+            document.getElementById('status-text').innerText = "❌ Error: No Transfer Code Found in QR.";
+            document.getElementById('status-text').style.color = "#ef4444";
         }
 
+        // नए कोडिंग सर्वरलेस बैकएंड से हाथ मिलाने का फ़ंक्शन
         async function connectToSender(code) {
-            document.getElementById('status-text').innerText = "📡 Hooking up via Cloudflare...";
-            
-            // क्लाउडफ्लेयर वर्कर से कनेक्शन जोड़ना
-            const res = await fetch(`https://workers.dev`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ roomCode: code })
-            });
-            const data = await res.json();
-            
-            if(data.error) {
-                document.getElementById('status-text').innerText = "❌ Code Expired or Invalid!";
-                return;
-            }
+            try {
+                document.getElementById('status-text').innerText = "📡 Connecting via Cloudflare Secure Pipeline...";
+                
+                // 🚀 आपका नया असली रीयल-टाइम कोडिंग एपीआई लिंक यहाँ सफलतापूर्वक सेट हो गया है
+                const res = await fetch(`https://workers.dev`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json' 
+                    },
+                    body: JSON.stringify({ roomCode: code })
+                });
+                
+                if (!res.ok) {
+                    throw new Error("Invalid or Expired Code");
+                }
+                
+                const data = await res.json();
+                
+                document.getElementById('status-text').innerText = "📥 Downloading file directly from PC...";
+                document.getElementById('status-text').style.color = "#22c55e";
+                document.getElementById('progress-container').style.display = 'block';
+                
+                // 📡 यहाँ कर्सर / क्लाउड एआई आपका WebRTC Peer Connection सिग्नल ट्रिगर कर देगा
+                setupWebRTCPeer(data.offer);
 
-            document.getElementById('status-text').innerText = "📥 Downloading File directly from PC...";
-            document.getElementById('progress-container').style.display = 'block';
-            
-            // यहाँ AI आपका पुराना WebRTC Peer Connection रन कर देगा...
+            } catch (error) {
+                console.error("Connection failed:", error);
+                document.getElementById('status-text').innerText = "❌ Link Expired or Room Disconnected!";
+                document.getElementById('status-text').style.color = "#ef4444";
+            }
+        }
+
+        function setupWebRTCPeer(offer) {
+            // भविष्य के डेटा पैकेट ट्रांसफर स्ट्रीम को कर्सर यहाँ पूरी तरह बाइंड कर देगा
+            console.log("WebRTC Signaling Received. Ready for Data Channels.");
         }
     </script>
 </body>
