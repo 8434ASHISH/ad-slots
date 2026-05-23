@@ -1,207 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="monetag" content="73d12c48ebdf60a6ce123f05d8653a2d">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UtraShare - Ad Slots</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-        }
-        
-        .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .subtitle {
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 30px;
-            font-size: 1rem;
-        }
-        
-        .ad-section {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        
-        .ad-label {
-            font-size: 0.85rem;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .ad-box {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 250px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border: 2px dashed #dee2e6;
-        }
-        
-        /* Monetag 300x250 Ad */
-        .monetag-ad {
-            width: 300px;
-            height: 250px;
-            margin: 0 auto;
-        }
-        
-        /* Adsterra 468x60 Ad */
-        .adsterra-banner {
-            width: 468px;
-            height: 60px;
-            margin: 0 auto;
-        }
-        
-        /* Adsterra 300x250 Ad */
-        .adsterra-box {
-            width: 300px;
-            height: 250px;
-            margin: 0 auto;
-        }
-        
-        .footer-legal {
-            background: rgba(255,255,255,0.95);
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-        
-        .footer-legal h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-        
-        .legal-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        .legal-links a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 20px;
-            background: rgba(102, 126, 234, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .legal-links a:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .copyright {
-            margin-top: 15px;
-            color: #666;
-            font-size: 0.85rem;
-        }
-        
-        @media (max-width: 600px) {
-            .adsterra-banner {
-                width: 100%;
-                max-width: 468px;
-            }
-            .logo {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+    <title>FileShare Ads Slot</title>
+    <!-- आपकी CSS फाइल का लिंक -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 💰 MONETAG / ADSTERRA SCRIPT HERE -->
+    <!-- यहाँ अपना Monetag या Adsterra का ओरिजिनल स्क्रिप्ट कोड पेस्ट करें -->
+    <script>(function(s,u,z,p,v,e,d){p=s.createElement(u);p.async=1;p.src=z;in=s.getElementsByTagName(u);in.parentNode.insertBefore(p,in);})(window,document,"//://heygizmo.com",window);</script>
 </head>
 <body>
-    <div class="container">
-        <!-- Logo -->
-        <div class="logo">⚡ UtraShare</div>
-        <div class="subtitle">P2P File Transfer - Fast, Secure & Direct</div>
-        
-        <!-- Monetag 300x250 Ad Slot -->
-        <div class="ad-section">
-            <div class="ad-label">Sponsored Content</div>
-            <div class="ad-box">
-                <div class="monetag-ad">
-                    <!-- 🔽 MONETAG 300x250 AD CODE YAHAN LAGAYE 🔽 -->
-                    <script src="https://your-monetag-script.js"></script>
-                    <!-- Monetag ad code yahan paste karein -->
-                </div>
+
+    <div class="ads-wrapper">
+        <div class="title-brand">⚡ UltraShare</div>
+        <div class="subtitle-brand">P2P File Transfer - Fast & Direct</div>
+
+        <!-- 🎯 विज्ञापन बॉक्स: यह साइज 300x250 विज्ञापन के लिए बिल्कुल परफेक्ट है -->
+        <div class="ad-card">
+            <span class="ad-label">Sponsored Content</span>
+            <div class="ad-slot-frame">
+                <!-- विज्ञापन लोड होने की जगह -->
+                <div id="monetag-ad-placement"></div>
             </div>
         </div>
-        
-        <!-- Adsterra 468x60 Banner Ad -->
-        <div class="ad-section">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-box" style="min-height: 80px;">
-                <div class="adsterra-banner">
-                    <!-- 🔽 ADSTERRA 468x60 AD CODE YAHAN LAGAYE 🔽 -->
-                    <script type="text/javascript">
-                        // Adsterra 468x60 code yahan paste karein
-                    </script>
-                </div>
+
+        <!-- 📄 लीगल फुटर सेक्शन (एक्सटेंशन और मोबाइल दोनों के लिए) -->
+        <div class="legal-box">
+            <div class="legal-title">📋 Legal Information</div>
+            <div class="links-grid">
+                <a href="privacy.html" target="_blank">Privacy Policy</a>
+                <a href="disclaimer.html" target="_blank">Disclaimer</a>
+                <a href="contact.html" target="_blank">Contact Us</a>
+                <a href="terms.html" target="_blank">Terms</a>
             </div>
-        </div>
-        
-        <!-- Adsterra 300x250 Box Ad -->
-        <div class="ad-section">
-            <div class="ad-label">Sponsored</div>
-            <div class="ad-box">
-                <div class="adsterra-box">
-                    <!-- 🔽 ADSTERRA 300x250 AD CODE YAHAN LAGAYE 🔽 -->
-                    <script type="text/javascript">
-                        // Adsterra 300x250 code yahan paste karein
-                    </script>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Legal Footer -->
-        <div class="footer-legal">
-            <h3>📄 Legal Information</h3>
-            <div class="legal-links">
-                <a href="privacy.html">🔒 Privacy Policy</a>
-                <a href="disclaimer.html">⚠️ Disclaimer</a>
-                <a href="contact.html">📧 Contact Us</a>
-                <a href="terms.html">📋 Terms of Service</a>
-            </div>
-            <div class="copyright">
-                © 2026 UtraShare. All rights reserved. | P2P Direct Transfer Technology
-            </div>
+            <div class="copyright">© 2026 FileShare. All rights reserved.</div>
         </div>
     </div>
+
 </body>
 </html>
